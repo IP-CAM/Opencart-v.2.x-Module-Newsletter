@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Newsletter</name>
+    <code>Newsletter</code>
+    <version>1.0</version>
+    <author>Beto Militao</author>
+    <link>http://www.betomidias.com.br</link>
+    <file path="admin/controller/common/column_left.php">
+        <operation>
+            <search position="before"><![CDATA[if ($marketing) {]]></search>
+            <add><![CDATA[
+
+            // inicio newsletter
+
+            if ($this->user->hasPermission('access', 'marketing/newsletter')) { 
+                $marketing[] = array(
+                    'name'     => $this->language->get('text_newsletter'),
+                    'href'     => $this->url->link('marketing/newsletter', 'token=' . $this->session->data['token'], true),
+                    'children' => array()       
+                );  
+            }
+
+            // fim newsletter
+
+            if ($marketing) {
+                ]]></add>
+        </operation>
+    </file>
+    <file path="admin/language/en-gb/common/column_left.php">
+        <operation>
+            <search position="after"><![CDATA[$_['text_coupon']                    = 'Coupons';]]></search>
+            <add><![CDATA[
+$_['text_coupon']                    = 'Coupons';
+$_['text_newsletter']                = 'Newsletter';
+                ]]></add>
+        </operation>
+    </file>
+</modification>
